@@ -131,14 +131,6 @@ class Tabuleiro:
                         self.matriz[linha][coluna] = 0
                         self.pedras_amigas -= 1
 
-
-            if linha == 7 or linha == 0:
-                pedra.transformarRainha()
-                if pedra.valor == 2:
-                    self.rainhas_amigas += 1
-                elif pedra.valor == -2:
-                    self.pedras_inimigas += 1
-
             self.turnos += 1
             self.vez = True
         else:
