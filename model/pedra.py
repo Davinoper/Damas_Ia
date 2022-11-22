@@ -13,10 +13,14 @@ class Pedra:
             self.valor = 2
         elif self.valor == -1:
             self.valor = -2
-    
+
     def __repr__(self):
         if(self.valor == 1):
             return 'P'
-        else:
+        elif(self.valor == -1):
             return 'B'
+        elif(self.valor == 2):
+            return '!'
+        elif(self.valor == -2):
+            return '?'
 

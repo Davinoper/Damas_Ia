@@ -13,7 +13,14 @@ while condicao:
     linha = int(input('linha: '))
     coluna = int(input('coluna: '))
     direcao = input('direcao: ')
-    tabuleiro.moverPedra(linha,coluna,direcao)
+    try:
+        tabuleiro.moverPedra(linha,coluna,direcao)
+    except:
+        print(" ")
+        print('|||||movimento inválido|||||')
+        print(" ")
+    
+    
     tabuleiro.imprimirTabuleiro()
     if tabuleiro.pedras_inimigas == 0:
         ganhador = 1
