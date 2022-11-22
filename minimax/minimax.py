@@ -2,12 +2,8 @@ from model.tabuleiro import Tabuleiro
 from model.pedra import Pedra
 
 def minimax(tabuleiro):
-    pedras = acharPedrasInimigas(tabuleiro)
-
-    for i in pedras:
-        print(f'linha: {i.linha} coluna: {i.coluna}') 
-
-
+    pedrasInimigas = acharPedrasInimigas(tabuleiro)
+    pedrasAmigas = acharPedrasAmigas(tabuleiro)
 
 def acharPedrasInimigas(tabuleiro):
     lista_pedras = []
@@ -17,6 +13,16 @@ def acharPedrasInimigas(tabuleiro):
                 if(tabuleiro.matriz[l][c].valor == -1 or tabuleiro.matriz[l][c].valor == -2):
                     lista_pedras.append(tabuleiro.matriz[l][c])
     return lista_pedras
+
+def acharPedrasAmigas(tabuleiro):
+    lista_pedras = []
+    for l in range(len(tabuleiro.matriz)):
+        for c in range(len(tabuleiro.matriz[l])):
+            if type(tabuleiro.matriz[l][c]) == type(Pedra(0,0,0)):
+                if(tabuleiro.matriz[l][c].valor == 1 or tabuleiro.matriz[l][c].valor == 2):
+                    lista_pedras.append(tabuleiro.matriz[l][c])
+    return lista_pedras
+
 
 def funcaoAvaliativa(tabuleiro,pedra):
     aux = tabuleiro

@@ -87,19 +87,20 @@ class Tabuleiro:
 
     def moverRainhaAmiga(self,linha,coluna,direcao,pedra):
         if direcao == 'be':
-            if self.matriz[linha + 1][coluna -1] == 0:
-                pedra.linha = linha + 1
-                pedra.coluna = coluna - 1
-                self.matriz[linha + 1][coluna - 1] = pedra
-                self.matriz[linha][coluna] = 0
+            if coluna != 0:
+                if self.matriz[linha + 1][coluna -1] == 0:
+                    pedra.linha = linha + 1
+                    pedra.coluna = coluna - 1
+                    self.matriz[linha + 1][coluna - 1] = pedra
+                    self.matriz[linha][coluna] = 0
 
-            elif not(self.matriz[linha +1][coluna -1]  == 0) and (self.matriz[linha+1][coluna-1].valor == -1 or self.matriz[linha+1][coluna-1].valor == -2):
-                pedra.linha = linha + 2
-                pedra.coluna = coluna - 2
-                self.matriz[linha + 1][coluna - 1] = 0
-                self.matriz[linha + 2][coluna - 2]  = pedra
-                self.matriz[linha][coluna] = 0
-                self.pedras_inimigas -= 1
+                elif not(self.matriz[linha +1][coluna -1]  == 0) and (self.matriz[linha+1][coluna-1].valor == -1 or self.matriz[linha+1][coluna-1].valor == -2):
+                    pedra.linha = linha + 2
+                    pedra.coluna = coluna - 2
+                    self.matriz[linha + 1][coluna - 1] = 0
+                    self.matriz[linha + 2][coluna - 2]  = pedra
+                    self.matriz[linha][coluna] = 0
+                    self.pedras_inimigas -= 1
 
         elif direcao == 'bd':
             if self.matriz[linha +1][coluna+1] == 0:
@@ -117,19 +118,20 @@ class Tabuleiro:
                 self.pedras_inimigas -= 1
 
         if direcao == 'ce':
-            if self.matriz[linha - 1][coluna -1] == 0:
-                pedra.linha = linha - 1
-                pedra.coluna = coluna - 1
-                self.matriz[linha - 1][coluna - 1] = pedra
-                self.matriz[linha][coluna] = 0
-            
-            elif not(self.matriz[linha - 1][coluna -1] == 0) and (self.matriz[linha - 1][coluna -1].valor == -1 or self.matriz[linha-1][coluna-1].valor == -2):
-                pedra.linha = linha - 2
-                pedra.coluna = coluna - 2
-                self.matriz[linha - 1][coluna - 1] = 0
-                self.matriz[linha - 2][coluna - 2] = pedra
-                self.matriz[linha][coluna] = 0
-                self.pedras_inimigas -= 1
+            if coluna != 0:
+                if self.matriz[linha - 1][coluna -1] == 0:
+                    pedra.linha = linha - 1
+                    pedra.coluna = coluna - 1
+                    self.matriz[linha - 1][coluna - 1] = pedra
+                    self.matriz[linha][coluna] = 0
+                
+                elif not(self.matriz[linha - 1][coluna -1] == 0) and (self.matriz[linha - 1][coluna -1].valor == -1 or self.matriz[linha-1][coluna-1].valor == -2):
+                    pedra.linha = linha - 2
+                    pedra.coluna = coluna - 2
+                    self.matriz[linha - 1][coluna - 1] = 0
+                    self.matriz[linha - 2][coluna - 2] = pedra
+                    self.matriz[linha][coluna] = 0
+                    self.pedras_inimigas -= 1
 
         elif direcao == 'cd':
             if self.matriz[linha - 1][coluna +1] == 0:
@@ -154,19 +156,20 @@ class Tabuleiro:
 
     def moverRainhaInimiga(self,linha,coluna,direcao,pedra):
         if direcao == 'be':
-            if self.matriz[linha + 1][coluna -1] == 0:
-                pedra.linha = linha + 1
-                pedra.coluna = coluna - 1
-                self.matriz[linha + 1][coluna - 1] = pedra
-                self.matriz[linha][coluna] = 0
+            if coluna != 0:
+                if self.matriz[linha + 1][coluna -1] == 0:
+                    pedra.linha = linha + 1
+                    pedra.coluna = coluna - 1
+                    self.matriz[linha + 1][coluna - 1] = pedra
+                    self.matriz[linha][coluna] = 0
 
-            elif not(self.matriz[linha +1][coluna -1]  == 0) and (self.matriz[linha+1][coluna-1].valor == 1 or self.matriz[linha+1][coluna-1].valor == 2):
-                pedra.linha = linha + 2
-                pedra.coluna = coluna - 2
-                self.matriz[linha + 1][coluna - 1] = 0
-                self.matriz[linha + 2][coluna - 2]  = pedra
-                self.matriz[linha][coluna] = 0
-                self.pedras_amigas -= 1
+                elif not(self.matriz[linha +1][coluna -1]  == 0) and (self.matriz[linha+1][coluna-1].valor == 1 or self.matriz[linha+1][coluna-1].valor == 2):
+                    pedra.linha = linha + 2
+                    pedra.coluna = coluna - 2
+                    self.matriz[linha + 1][coluna - 1] = 0
+                    self.matriz[linha + 2][coluna - 2]  = pedra
+                    self.matriz[linha][coluna] = 0
+                    self.pedras_amigas -= 1
 
 
         elif direcao == 'bd':
@@ -185,19 +188,20 @@ class Tabuleiro:
                 self.pedras_amigas -= 1
 
         if direcao == 'ce':
-            if self.matriz[linha - 1][coluna -1] == 0:
-                pedra.linha = linha - 1
-                pedra.coluna = coluna - 1
-                self.matriz[linha - 1][coluna - 1] = pedra
-                self.matriz[linha][coluna] = 0
-            
-            elif not(self.matriz[linha - 1][coluna -1] == 0) and (self.matriz[linha - 1][coluna -1].valor == 1 or self.matriz[linha-1][coluna-1].valor == 2):
-                pedra.linha = linha - 2
-                pedra.coluna = coluna - 2
-                self.matriz[linha - 1][coluna - 1] = 0
-                self.matriz[linha - 2][coluna - 2] = pedra
-                self.matriz[linha][coluna] = 0
-                self.pedras_amigas -= 1
+            if coluna != 0:
+                if self.matriz[linha - 1][coluna -1] == 0:
+                    pedra.linha = linha - 1
+                    pedra.coluna = coluna - 1
+                    self.matriz[linha - 1][coluna - 1] = pedra
+                    self.matriz[linha][coluna] = 0
+                
+                elif not(self.matriz[linha - 1][coluna -1] == 0) and (self.matriz[linha - 1][coluna -1].valor == 1 or self.matriz[linha-1][coluna-1].valor == 2):
+                    pedra.linha = linha - 2
+                    pedra.coluna = coluna - 2
+                    self.matriz[linha - 1][coluna - 1] = 0
+                    self.matriz[linha - 2][coluna - 2] = pedra
+                    self.matriz[linha][coluna] = 0
+                    self.pedras_amigas -= 1
 
         elif direcao == 'cd':
             if self.matriz[linha - 1][coluna +1] == 0:
@@ -222,19 +226,20 @@ class Tabuleiro:
     def moverAmigo(self, linha, coluna, direcao, pedra):
         if pedra.valor == 1:
             if direcao == 'e':
-                if self.matriz[linha + 1][coluna -1] == 0:
-                    pedra.linha = linha + 1
-                    pedra.coluna = coluna - 1
-                    self.matriz[linha + 1][coluna - 1] = pedra
-                    self.matriz[linha][coluna] = 0
+                if coluna != 0:
+                    if self.matriz[linha + 1][coluna -1] == 0:
+                        pedra.linha = linha + 1
+                        pedra.coluna = coluna - 1
+                        self.matriz[linha + 1][coluna - 1] = pedra
+                        self.matriz[linha][coluna] = 0
 
-                elif not(self.matriz[linha +1][coluna -1]  == 0) and (self.matriz[linha+1][coluna-1].valor == -1 or self.matriz[linha+1][coluna-1].valor == -2):
-                    pedra.linha = linha + 2
-                    pedra.coluna = coluna - 2
-                    self.matriz[linha + 1][coluna - 1] = 0
-                    self.matriz[linha + 2][coluna - 2]  = pedra
-                    self.matriz[linha][coluna] = 0
-                    self.pedras_inimigas -= 1
+                    elif not(self.matriz[linha +1][coluna -1]  == 0) and (self.matriz[linha+1][coluna-1].valor == -1 or self.matriz[linha+1][coluna-1].valor == -2):
+                        pedra.linha = linha + 2
+                        pedra.coluna = coluna - 2
+                        self.matriz[linha + 1][coluna - 1] = 0
+                        self.matriz[linha + 2][coluna - 2]  = pedra
+                        self.matriz[linha][coluna] = 0
+                        self.pedras_inimigas -= 1
 
 
             elif direcao == 'd':
@@ -265,19 +270,20 @@ class Tabuleiro:
     def moverInimigo(self,linha,coluna,direcao,pedra):
         if pedra.valor == -1:
                 if direcao == 'e':
-                    if self.matriz[linha - 1][coluna -1] == 0:
-                        pedra.linha = linha - 1
-                        pedra.coluna = coluna - 1
-                        self.matriz[linha - 1][coluna - 1] = pedra
-                        self.matriz[linha][coluna] = 0
-                    
-                    elif not(self.matriz[linha - 1][coluna -1] == 0) and (self.matriz[linha - 1][coluna -1].valor == 1 or self.matriz[linha - 1][coluna -1].valor == 2):
-                        pedra.linha = linha - 2
-                        pedra.coluna = coluna - 2
-                        self.matriz[linha - 1][coluna - 1] = 0
-                        self.matriz[linha - 2][coluna - 2] = pedra
-                        self.matriz[linha][coluna] = 0
-                        self.pedras_amigas -= 1
+                    if coluna != 0:
+                        if self.matriz[linha - 1][coluna -1] == 0:
+                            pedra.linha = linha - 1
+                            pedra.coluna = coluna - 1
+                            self.matriz[linha - 1][coluna - 1] = pedra
+                            self.matriz[linha][coluna] = 0
+                        
+                        elif not(self.matriz[linha - 1][coluna -1] == 0) and (self.matriz[linha - 1][coluna -1].valor == 1 or self.matriz[linha - 1][coluna -1].valor == 2):
+                            pedra.linha = linha - 2
+                            pedra.coluna = coluna - 2
+                            self.matriz[linha - 1][coluna - 1] = 0
+                            self.matriz[linha - 2][coluna - 2] = pedra
+                            self.matriz[linha][coluna] = 0
+                            self.pedras_amigas -= 1
 
                 elif direcao == 'd':
                     if self.matriz[linha - 1][coluna +1] == 0:
