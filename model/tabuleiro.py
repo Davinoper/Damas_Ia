@@ -57,7 +57,7 @@ class Tabuleiro:
                         self.matriz[linha].append(0)
                 else:
                     self.matriz[linha].append(0)
-         self.matriz[6][6] = Pedra(6,6,1)           
+                 
     
 
 
@@ -228,7 +228,7 @@ class Tabuleiro:
                     self.matriz[linha + 1][coluna - 1] = pedra
                     self.matriz[linha][coluna] = 0
 
-                elif not(self.matriz[linha +1][coluna -1]  == 0) and self.matriz[linha+1][coluna-1].valor == -1:
+                elif not(self.matriz[linha +1][coluna -1]  == 0) and (self.matriz[linha+1][coluna-1].valor == -1 or self.matriz[linha+1][coluna-1].valor == -2):
                     pedra.linha = linha + 2
                     pedra.coluna = coluna - 2
                     self.matriz[linha + 1][coluna - 1] = 0
@@ -244,7 +244,7 @@ class Tabuleiro:
                     self.matriz[linha + 1][coluna + 1] = pedra
                     self.matriz[linha][coluna] = 0
 
-                elif not(self.matriz[linha+1][coluna+1] == 0) and self.matriz[linha+1][coluna+1].valor == -1:
+                elif not(self.matriz[linha+1][coluna+1] == 0) and (self.matriz[linha+1][coluna+1].valor == -1 or self.matriz[linha+1][coluna+1].valor == -2):
                     pedra.linha = linha + 2
                     pedra.coluna = coluna + 2
                     self.matriz[linha + 1][coluna + 1] = 0
@@ -271,7 +271,7 @@ class Tabuleiro:
                         self.matriz[linha - 1][coluna - 1] = pedra
                         self.matriz[linha][coluna] = 0
                     
-                    elif not(self.matriz[linha - 1][coluna -1] == 0) and self.matriz[linha - 1][coluna -1].valor == 1:
+                    elif not(self.matriz[linha - 1][coluna -1] == 0) and (self.matriz[linha - 1][coluna -1].valor == 1 or self.matriz[linha - 1][coluna -1].valor == 2):
                         pedra.linha = linha - 2
                         pedra.coluna = coluna - 2
                         self.matriz[linha - 1][coluna - 1] = 0
@@ -286,7 +286,7 @@ class Tabuleiro:
                         self.matriz[linha - 1][coluna + 1] = pedra
                         self.matriz[linha][coluna] = 0
 
-                    elif not(self.matriz[linha - 1][coluna +1] == 0) and self.matriz[linha - 1][coluna +1].valor == 1:
+                    elif not(self.matriz[linha - 1][coluna +1] == 0) and (self.matriz[linha - 1][coluna +1].valor == 1 or self.matriz[linha - 1][coluna +1].valor == 2):
                         pedra.linha = linha - 2
                         pedra.coluna = coluna + 2
                         self.matriz[linha - 1][coluna + 1] = 0

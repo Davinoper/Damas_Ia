@@ -28,6 +28,7 @@ while condicao:
     elif tabuleiro.pedras_amigas == 0:
         ganhador = -1
         condicao = False
+    
 
 if(ganhador == 1):
     print('Parabéns você ganhou!')
