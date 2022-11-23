@@ -43,17 +43,17 @@ def funcaoAvaliativa(tabuleiro,pedra):
     try:
         if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1] != 0 ):
             if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1].valor == -1 or tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1].valor == -2):
-                valorD -= 1
+                valorD = 1
             else:
-                valorD +=1
+                valorD =1
         if(tabuleiro.matriz[pedra.linha - 2][pedra.coluna + 2] == 0):
-            valorD += 1
+            valorD = 1
     
         if(tabuleiro.pedras_inimigas < aux.pedras_inimigas):
-            valorD +=1
+            valorD =1
 
         if(tabuleiro.pedras_amigas < aux.pedras_amigas):
-            valorD -= 1
+            valorD = 1
 
         
     except:
@@ -64,17 +64,17 @@ def funcaoAvaliativa(tabuleiro,pedra):
     try:
         if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1] != 0 ):
             if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1].valor == -1 or tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1].valor == -2):
-                valorE -= 1
+                valorE = 1
             else:
-                valorE +=1
+                valorE =1
         if(tabuleiro.matriz[pedra.linha - 2][pedra.coluna - 2] == 0):
-            valorE += 1
+            valorE = 1
     
         if(tabuleiro.pedras_inimigas < aux.pedras_inimigas):
-            valorE +=1
+            valorE =1
 
         if(tabuleiro.pedras_amigas < aux.pedras_amigas):
-            valorE -= 1
+            valorE = 1
     except:
         print(f'Linha:{pedra.linha} coluna:{pedra.coluna} -> não pode ir para a esquerda')
 
