@@ -1,4 +1,3 @@
-import numpy as np
 from model.pedra import Pedra
 from minimax.minimax import minimax
 
@@ -72,17 +71,23 @@ class Tabuleiro:
             if(aux.linha == 7):
                 self.matriz[aux.linha][aux.coluna].transformarRainha()
                 self.rainhas_amigas +=1
+
         elif self.vez and pedra.valor == 2:
             self.moverRainhaAmiga(linha,coluna,direcao,pedra)
+
         elif not self.vez:
             res = minimax(self)
-            print(res[0].linha, res[0].coluna)
-            aux = self.moverInimigo(res[0].linha,res[0].coluna,res[1],res[0])
+
+            if(res[0].valor == -1):
+                print(res[0].linha, res[0].coluna,res[1])
+                aux = self.moverInimigo(res[0].linha,res[0].coluna,res[1],res[0])
+            elif(res[0].valor == -2):
+                print(res[0].linha, res[0].coluna,res[1])
+                self.moverRainhaInimiga(res[0].linha,res[0].coluna,res[1],res[0])
+
             if(aux.linha == 0):
                 self.matriz[aux.linha][aux.coluna].transformarRainha()
                 self.rainhas_inimigas +=1
-        elif not self.vez and pedra.valor == -2:
-            self.moverRainhaInimiga(linha,coluna,direcao,pedra)
 
 
         
@@ -158,7 +163,7 @@ class Tabuleiro:
 
     def moverRainhaInimiga(self,linha,coluna,direcao,pedra):
         if direcao == 'be':
-            if coluna != 0:
+            if coluna == 0:
                 if self.matriz[linha + 1][coluna -1] == 0:
                     pedra.linha = linha + 1
                     pedra.coluna = coluna - 1
@@ -175,22 +180,23 @@ class Tabuleiro:
 
 
         elif direcao == 'bd':
-            if self.matriz[linha +1][coluna+1] == 0:
-                pedra.linha = linha + 1
-                pedra.coluna = coluna + 1
-                self.matriz[linha + 1][coluna + 1] = pedra
-                self.matriz[linha][coluna] = 0
+            if coluna == 7:
+                if self.matriz[linha +1][coluna+1] == 0:
+                    pedra.linha = linha + 1
+                    pedra.coluna = coluna + 1
+                    self.matriz[linha + 1][coluna + 1] = pedra
+                    self.matriz[linha][coluna] = 0
 
-            elif not(self.matriz[linha+1][coluna+1] == 0) and (self.matriz[linha+1][coluna+1].valor == 1 or self.matriz[linha+1][coluna+1].valor == 2):
-                pedra.linha = linha + 2
-                pedra.coluna = coluna + 2
-                self.matriz[linha + 1][coluna + 1] = 0
-                self.matriz[linha + 2][coluna + 2]  = pedra
-                self.matriz[linha][coluna] = 0
-                self.pedras_amigas -= 1
+                elif not(self.matriz[linha+1][coluna+1] == 0) and (self.matriz[linha+1][coluna+1].valor == 1 or self.matriz[linha+1][coluna+1].valor == 2):
+                    pedra.linha = linha + 2
+                    pedra.coluna = coluna + 2
+                    self.matriz[linha + 1][coluna + 1] = 0
+                    self.matriz[linha + 2][coluna + 2]  = pedra
+                    self.matriz[linha][coluna] = 0
+                    self.pedras_amigas -= 1
 
         if direcao == 'ce':
-            if coluna != 0:
+            if linha != 0:
                 if self.matriz[linha - 1][coluna -1] == 0:
                     pedra.linha = linha - 1
                     pedra.coluna = coluna - 1
@@ -206,19 +212,20 @@ class Tabuleiro:
                     self.pedras_amigas -= 1
 
         elif direcao == 'cd':
-            if self.matriz[linha - 1][coluna +1] == 0:
-                pedra.linha = linha - 1
-                pedra.coluna = coluna + 1
-                self.matriz[linha - 1][coluna + 1] = pedra
-                self.matriz[linha][coluna] = 0
+            if linha != 0:
+                if self.matriz[linha - 1][coluna +1] == 0:
+                    pedra.linha = linha - 1
+                    pedra.coluna = coluna + 1
+                    self.matriz[linha - 1][coluna + 1] = pedra
+                    self.matriz[linha][coluna] = 0
 
-            elif not(self.matriz[linha - 1][coluna +1] == 0) and (self.matriz[linha - 1][coluna +1].valor == 1 or self.matriz[linha-1][coluna+1].valor == 2):
-                pedra.linha = linha - 2
-                pedra.coluna = coluna + 2
-                self.matriz[linha - 1][coluna + 1] = 0
-                self.matriz[linha - 2][coluna + 2] = pedra
-                self.matriz[linha][coluna] = 0
-                self.pedras_amigas -= 1
+                elif not(self.matriz[linha - 1][coluna +1] == 0) and (self.matriz[linha - 1][coluna +1].valor == 1 or self.matriz[linha-1][coluna+1].valor == 2):
+                    pedra.linha = linha - 2
+                    pedra.coluna = coluna + 2
+                    self.matriz[linha - 1][coluna + 1] = 0
+                    self.matriz[linha - 2][coluna + 2] = pedra
+                    self.matriz[linha][coluna] = 0
+                    self.pedras_amigas -= 1
         else:
            pass
 

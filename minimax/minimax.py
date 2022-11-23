@@ -1,13 +1,16 @@
 from model.pedra import Pedra
 
 def minimax(tabuleiro):
-    pedrasAmigas = acharPedrasInimigas(tabuleiro)
+    pedrasInimigas = acharPedrasInimigas(tabuleiro)
     max = 0
     pedra_vez =Pedra(0,0,0)
     direcao = 'd'
 
-    for z in pedrasAmigas:
-        res = funcaoAvaliativa(tabuleiro,z)
+    for z in pedrasInimigas:
+        if(z.valor == -1):
+            res = funcaoAvaliativa(tabuleiro,z)
+        else:
+            res = funcaoAvaliativaRainha(tabuleiro,z)
         print(f'Linha:{z.linha} coluna:{z.coluna} para a direita =', res[0] )
         if(res[0] > max):
             max = res[0]
@@ -37,49 +40,38 @@ def acharPedrasAmigas(tabuleiro):
 
 
 def funcaoAvaliativa(tabuleiro,pedra):
-    aux = tabuleiro
+    res = []
     valorD = 0
     valorE = 0
     try:
         if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1] != 0 ):
             if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1].valor == -1 or tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1].valor == -2):
-                valorD = 1
+                valorD = -1
             else:
-                valorD =1
+                valorD = 1
         if(tabuleiro.matriz[pedra.linha - 2][pedra.coluna + 2] == 0):
             valorD = 1
     
-        if(tabuleiro.pedras_inimigas < aux.pedras_inimigas):
-            valorD =1
-
-        if(tabuleiro.pedras_amigas < aux.pedras_amigas):
-            valorD = 1
-
-        
+    
     except:
-        print(f'Linha:{pedra.linha} coluna:{pedra.coluna} -> não pode ir para a direita')
+        pass
 
-    tabuleiro = aux
+
 
     try:
         if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1] != 0 ):
             if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1].valor == -1 or tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1].valor == -2):
-                valorE = 1
+                valorE = -1
             else:
                 valorE =1
         if(tabuleiro.matriz[pedra.linha - 2][pedra.coluna - 2] == 0):
             valorE = 1
     
-        if(tabuleiro.pedras_inimigas < aux.pedras_inimigas):
-            valorE =1
-
-        if(tabuleiro.pedras_amigas < aux.pedras_amigas):
-            valorE = 1
     except:
-        print(f'Linha:{pedra.linha} coluna:{pedra.coluna} -> não pode ir para a esquerda')
+        pass
 
-    tabuleiro = aux
-    res = []
+
+    
     if(valorE > valorD):
         res.append(valorE)
         res.append('e')
@@ -88,6 +80,92 @@ def funcaoAvaliativa(tabuleiro,pedra):
         res.append('d')
 
     return res
+
+
+def funcaoAvaliativaRainha(tabuleiro,pedra):
+    valorCD = 0
+    valorCE = 0
+    valorBD = 0
+    valorBE = 0
+    res = []
+    try:
+        if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1] != 0 ):
+            if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1].valor == -1 or tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1].valor == -2):
+                valorCD = -1
+            else:
+                valorCD = 1
+        if(tabuleiro.matriz[pedra.linha - 2][pedra.coluna + 2] == 0):
+            valorCD = 1
+    except:
+        pass
+
+
+
+    try:
+        if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1] != 0 ):
+            if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1].valor == -1 or tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1].valor == -2):
+                valorCE = -1
+            else:
+                valorCE =1
+        if(tabuleiro.matriz[pedra.linha - 2][pedra.coluna - 2] == 0):
+            valorCE = 1
+
+        if(pedra.linha == 0):
+            valorCE = -1
+    except:
+        pass
+
+
+
+    try:
+        if(tabuleiro.matriz[pedra.linha + 1][pedra.coluna + 1] != 0 ):
+            if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1].valor == -1 or tabuleiro.matriz[pedra.linha - 1][pedra.coluna + 1].valor == -2):
+                valorBD = -1
+            else:
+                valorBD = 1
+        if(tabuleiro.matriz[pedra.linha + 2][pedra.coluna + 2] == 0):
+            valorBD = 1
+    except:
+        pass
+
+    
+    try:
+        if(tabuleiro.matriz[pedra.linha + 1][pedra.coluna - 1] != 0 ):
+            if(tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1].valor == -1 or tabuleiro.matriz[pedra.linha - 1][pedra.coluna - 1].valor == -2):
+                valorBE = -1
+            else:
+                valorBE =1
+        if(tabuleiro.matriz[pedra.linha + 2][pedra.coluna - 2] == 0):
+            valorBE = 1
+    except:
+        pass
+
+    aux = []
+    if(valorBD > valorBE):
+        res.append(valorBD)
+        res.append('bd')
+    else:
+        res.append(valorBE)
+        res.append('be')
+        
+    if(valorCD > valorCE):
+        aux.append(valorCD)
+        aux.append('cd')
+    else:
+        aux.append(valorCE)
+        aux.append('ce')
+    
+    if(res[0] > aux[0]):
+        pass
+    else:
+        res = aux
+
+    
+    
+    return res
+
+
+
 
 
     # 1 - para peças Pretas
