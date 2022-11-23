@@ -1,5 +1,4 @@
-from model.tabuleiro import Tabuleiro 
-
+from model.tabuleiro import Tabuleiro
 tabuleiro = Tabuleiro()
 
 tabuleiro.gerarTabuleiro()
@@ -10,9 +9,10 @@ condicao = True
 ganhador = 1
 
 while condicao:
-    linha = int(input('linha: '))
-    coluna = int(input('coluna: '))
-    direcao = input('direcao: ')
+    if tabuleiro.vez:
+        linha = int(input('linha: '))
+        coluna = int(input('coluna: '))
+        direcao = input('direcao: ')
     try:
         tabuleiro.moverPedra(linha,coluna,direcao)
     except:

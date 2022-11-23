@@ -1,6 +1,6 @@
 import numpy as np
 from model.pedra import Pedra
-import rotate_matrix as rtm
+from minimax.minimax import minimax
 
 class Tabuleiro:
     def __init__(self):
@@ -74,8 +74,10 @@ class Tabuleiro:
                 self.rainhas_amigas +=1
         elif self.vez and pedra.valor == 2:
             self.moverRainhaAmiga(linha,coluna,direcao,pedra)
-        elif not self.vez and pedra.valor == -1:
-            aux = self.moverInimigo(linha,coluna,direcao,pedra)
+        elif not self.vez:
+            res = minimax(self)
+            print(res[0].linha, res[0].coluna)
+            aux = self.moverInimigo(res[0].linha,res[0].coluna,res[1],res[0])
             if(aux.linha == 0):
                 self.matriz[aux.linha][aux.coluna].transformarRainha()
                 self.rainhas_inimigas +=1
